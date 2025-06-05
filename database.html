@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Database</title>
+</head>
+<body>
+  <h2>Akses Database</h2>
+  <input type="password" id="dbpass" placeholder="Masukkan Password" />
+  <button onclick="goDatabase()">Buka Database</button>
+
+  <script>
+    function goDatabase() {
+      if (document.getElementById("dbpass").value === "1234") {
+        window.open('LINK_GOOGLE_SHEET_MU', '_blank');
+      } else {
+        alert("Password salah!");
+      }
+    }
+  </script>
+</body>
+</html>

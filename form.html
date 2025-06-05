@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Input Maintenance</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h2>Input Data Maintenance</h2>
+  <div id="auth">
+    <input type="password" id="password" placeholder="Masukkan Password" />
+    <button onclick="checkPassword()">Lanjut</button>
+  </div>
+
+  <form id="form" style="display:none" onsubmit="submitForm(event)">
+    <input name="id_mesin" placeholder="ID Mesin" required />
+    <input name="date" type="date" required />
+    <input name="job" placeholder="Job Description" required />
+    <input name="part" placeholder="Part Replace" />
+    <input name="rh" placeholder="Running Hours" />
+    <textarea name="remark" placeholder="Remark"></textarea>
+    <button type="submit">Kirim</button>
+  </form>
+
+  <script>
+    function checkPassword() {
+      if (document.getElementById("password").value === "1234") {
+        document.getElementById("auth").style.display = "none";
+        document.getElementById("form").style.display = "block";
+      } else {
+        alert("Password salah!");
+      }
+    }
+
+    function submitForm(e) {
+      e.preventDefault();
+      const form = e.target;
+      fetch('PASTE_YOUR_SCRIPT_URL_HERE', {
+        method: 'POST',
+        body: new URLSearchParams(new FormData(form))
+      })
+      .then(res => res.text())
+      .then(alert)
+      .catch(console.error);
+    }
+  </script>
+</body>
+</html>
