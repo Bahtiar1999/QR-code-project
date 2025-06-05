@@ -1,17 +1,64 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-  <title>Monitoring Maintenance</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Unit Mesin</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem;
+      background-color: #f9f9f9;
+    }
+    h1 {
+      text-align: center;
+    }
+    .unit-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .unit-card {
+      background: #fff;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .unit-card h3 {
+      margin-top: 0;
+    }
+  </style>
 </head>
 <body>
-  <h2>Deskripsi Unit Mesin</h2>
-  <div id="unit-detail"></div>
+  <h1>Daftar Unit Mesin</h1>
+  <div class="unit-list" id="unit-list">Memuat data...</div>
 
-  <button onclick="window.location.href='form.html'">Input Maintenance</button>
-  <button onclick="window.location.href='historis.html'">Tampilkan Historis</button>
-  <button onclick="window.location.href='database.html'">Database</button>
+  <script>
+    const sheetURL = "https://script.google.com/macros/s/AKfycbxIC8jzCLFePfums87ZVAJVgXy9UKCXu9UL8WXZR4O4kwOEqyWcHRQv-hkXNCdskvKo/exec"; // Ganti dengan URL WebApp Anda
 
-  <script src="script.js"></script>
+    fetch(sheetURL)
+      .then(response => response.json())
+      .then(data => {
+        const container = document.getElementById("unit-list");
+        container.innerHTML = "";
+        data.forEach(unit => {
+          const card = document.createElement("div");
+          card.className = "unit-card";
+          card.innerHTML = `
+            <h3>${unit["Nama Mesin"]} (${unit["ID Mesin"]})</h3>
+            <p><strong>Merk:</strong> ${unit["Merk Elektromotor"]}</p>
+            <p><strong>Daya:</strong> ${unit["Daya"]} kW</p>
+            <p><strong>RPM:</strong> ${unit["RPM"]}</p>
+            <p><strong>Lokasi:</strong> ${unit["Lokasi"]}</p>
+          `;
+          container.appendChild(card);
+        });
+      })
+      .catch(err => {
+        document.getElementById("unit-list").innerText = "Gagal memuat data unit mesin.";
+        console.error("Fetch error:", err);
+      });
+  </script>
 </body>
 </html>
