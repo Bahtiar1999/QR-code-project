@@ -1,6 +1,6 @@
 window.onload = function() {
   if (document.getElementById("unit-detail")) {
-    fetch("PASTE_URL_SCRIPT_KAMU")
+    fetch("https://script.google.com/macros/s/AKfycbwZHiMjP1haT7ZMRWhwTKE6LFk0jWhoEP3V5aC_IawMooHszQSU7J3nbrN0ff6TiJ8R/exec")
       .then(res => res.json())
       .then(data => {
         let html = "<ul>";
