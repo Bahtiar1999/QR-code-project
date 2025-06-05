@@ -34,7 +34,7 @@
     function submitForm(e) {
       e.preventDefault();
       const form = e.target;
-      fetch('PASTE_YOUR_SCRIPT_URL_HERE', {
+      fetch('https://script.google.com/macros/s/AKfycbwZHiMjP1haT7ZMRWhwTKE6LFk0jWhoEP3V5aC_IawMooHszQSU7J3nbrN0ff6TiJ8R/exec', {
         method: 'POST',
         body: new URLSearchParams(new FormData(form))
       })
