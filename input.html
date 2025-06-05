@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Input Maintenance</title>
+</head>
+<body>
+  <h2>Input Maintenance</h2>
+  <form id="passwordForm">
+    <label>Masukkan Password: </label>
+    <input type="password" id="password" required />
+    <button type="submit">Lanjut</button>
+  </form>
+
+  <form id="maintenanceForm" style="display:none;">
+    <label>ID Mesin:</label>
+    <input type="text" name="id" required><br>
+
+    <label>Tanggal:</label>
+    <input type="date" name="date" required><br>
+
+    <label>Job Description:</label>
+    <input type="text" name="job" required><br>
+
+    <label>Part Replace:</label>
+    <input type="text" name="part"><br>
+
+    <label>Running Hours:</label>
+    <input type="number" name="rh"><br>
+
+    <label>Remark:</label>
+    <textarea name="remark"></textarea><br>
+
+    <button type="submit">Kirim</button>
+  </form>
+
+  <script>
+    const scriptURL = "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec";
+
+    document.getElementById("passwordForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      if (document.getElementById("password").value === "1234") {
+        document.getElementById("passwordForm").style.display = "none";
+        document.getElementById("maintenanceForm").style.display = "block";
+      } else {
+        alert("Password salah!");
+      }
+    });
+
+    document.getElementById("maintenanceForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      fetch(scriptURL, { method: 'POST', body: formData })
+        .then(() => alert("Data berhasil dikirim!"))
+        .catch(error => alert("Gagal kirim data."));
+    });
+  </script>
+</body>
+</html>
